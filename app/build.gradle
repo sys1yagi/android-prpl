@@ -27,6 +27,8 @@ dependencies {
 
     kapt "com.android.databinding:compiler:$gradle_tools_version"
 
+    compile 'org.koin:koin-android:0.5.2'
+
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -46,6 +48,16 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$corouine_version"
 
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.robolectric:robolectric:3.5.1"
+    testImplementation "org.robolectric:shadows-multidex:3.5.1"
+    testImplementation("com.squareup.assertj:assertj-android:1.2.0") {
+        exclude group: 'com.android.support'
+    }
+    testImplementation("com.nhaarman:mockito-kotlin-kt1.1:1.5.0") {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
+    }
+    testImplementation 'org.mockito:mockito-core:2.11.0'
+
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
