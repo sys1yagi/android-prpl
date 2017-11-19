@@ -25,7 +25,7 @@ android {
 
 dependencies {
 
-    kapt "com.android.databinding:compiler:$gradleToolsVersion"
+    kapt "com.android.databinding:compiler:$gradle_tools_version"
 
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -41,6 +41,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$corouine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$corouine_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
