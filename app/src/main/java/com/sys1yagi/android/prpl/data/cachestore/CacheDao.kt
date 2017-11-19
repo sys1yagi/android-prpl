@@ -1,17 +1,17 @@
 package com.sys1yagi.android.prpl.data.cachestore
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import android.arch.persistence.room.*
 
 @Dao
 interface CacheDao {
 
     @Query("SELECT * FROM cache WHERE key = :key LIMIT 1")
-    fun get(key: String): Cache
+    fun get(key: String): Cache?
 
-    @Insert
+    @Query("SELECT count(0) FROM cache WHERE key = :key LIMIT 1")
+    fun exists(key: String): Boolean
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(cache: Cache)
 
     @Delete
