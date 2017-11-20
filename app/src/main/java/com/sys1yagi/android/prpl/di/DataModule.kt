@@ -40,7 +40,7 @@ class DataModule(val applicationContext: Context) : AndroidModule() {
         }
 
         provide<CacheController> {
-            CacheController(get(), get())
+            CacheController(get(), get(), get())
         }
 
         provide<Gson> {

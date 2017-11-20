@@ -1,9 +1,8 @@
 package com.sys1yagi.android.prpl.data.cachestore
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.ColumnInfo
-
 
 
 @Entity(tableName = "cache")
@@ -16,4 +15,7 @@ class Cache {
 
     @ColumnInfo(name = "value")
     var value: String = ""
+
+    @ColumnInfo(name = "created_at")
+    var createdAt: Long = 0L
 }
