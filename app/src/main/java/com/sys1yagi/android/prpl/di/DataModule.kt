@@ -8,7 +8,6 @@ import com.sys1yagi.android.prpl.data.cachestore.CacheController
 import com.sys1yagi.android.prpl.data.cachestore.CacheDao
 import com.sys1yagi.android.prpl.data.cachestore.CacheDatabase
 import com.sys1yagi.android.prpl.data.retrofit.ApiClient
-import okhttp3.OkHttpClient
 import org.koin.android.module.AndroidModule
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,13 +15,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DataModule(val applicationContext: Context) : AndroidModule() {
     override fun context() = applicationContext {
-        provide<OkHttpClient> {
-            OkHttpClient.Builder().build()
-        }
-
         provide<Retrofit> {
             Retrofit.Builder()
                     .baseUrl("https://api.github.com")
+                    .client(get())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
         }
