@@ -11,6 +11,8 @@ import android.widget.Toast
 import com.sys1yagi.android.prpl.R
 import com.sys1yagi.android.prpl.databinding.ActivityMainBinding
 import com.sys1yagi.android.prpl.extension.observe
+import com.sys1yagi.android.prpl.ui.repodetail.RepoDetailActivity
+import com.sys1yagi.android.prpl.ui.repodetail.RepoDetailActivityStarter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.databinding.ViewHolder
 import org.koin.android.ext.android.inject
@@ -37,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         adapter.setOnItemClickListener { item, view ->
             when (item) {
                 is RepoNameItem -> {
-                    Toast.makeText(this, item.repo.name, Toast.LENGTH_SHORT).show()
+                    RepoDetailActivityStarter.start(this, item.id)
                 }
             }
         }
