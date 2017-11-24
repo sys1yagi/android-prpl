@@ -20,10 +20,9 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay">
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
             <android.support.v7.widget.RecyclerView
@@ -31,6 +30,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
             />
-        </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+            />
+        </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

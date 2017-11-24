@@ -7,11 +7,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
 import com.sys1yagi.android.prpl.R
 import com.sys1yagi.android.prpl.databinding.ActivityMainBinding
+import com.sys1yagi.android.prpl.extension.gone
 import com.sys1yagi.android.prpl.extension.observe
-import com.sys1yagi.android.prpl.ui.repodetail.RepoDetailActivity
+import com.sys1yagi.android.prpl.extension.visible
 import com.sys1yagi.android.prpl.ui.repodetail.RepoDetailActivityStarter
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.databinding.ViewHolder
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     val binding by lazy { DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main) }
     val factory: MainViewModelFactory by inject()
-    val viewModel by lazy { ViewModelProviders.of(this, factory).get(MainViewModel::class.java) }
+    val viewModel by lazy<MainContract.ViewModel> { ViewModelProviders.of(this, factory).get(MainViewModel::class.java) }
     val adapter = GroupAdapter<ViewHolder<ViewDataBinding>>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +53,20 @@ class MainActivity : AppCompatActivity() {
                 adapter.add(it)
             }
             adapter.notifyDataSetChanged()
+        }
+
+        viewModel.progress.observe(this) {
+            if (it == true) {
+                binding.progressBar.visible()
+                binding.recyclerView.gone()
+            } else {
+                binding.progressBar.gone()
+                binding.recyclerView.visible()
+            }
+        }
+
+        viewModel.loadError.observe(this) {
+            // TODO
         }
     }
 
