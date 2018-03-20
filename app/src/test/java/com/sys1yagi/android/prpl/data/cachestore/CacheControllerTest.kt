@@ -3,6 +3,8 @@ package com.sys1yagi.android.prpl.data.cachestore
 import android.arch.persistence.room.Room
 import com.google.gson.Gson
 import com.sys1yagi.android.prpl.data.entity.User
+import com.sys1yagi.android.prpl.extension.genericType
+import com.sys1yagi.android.prpl.util.DefaultTimeProvider
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -22,7 +24,7 @@ class CacheControllerTest {
                 .databaseBuilder(RuntimeEnvironment.application, CacheDatabase::class.java, "cache-test")
                 .allowMainThreadQueries()
                 .build()
-        cacheController = CacheController(database.cacheDao(), Gson())
+        cacheController = CacheController(database.cacheDao(), Gson(), DefaultTimeProvider())
     }
 
     @Test
@@ -33,7 +35,7 @@ class CacheControllerTest {
 
         val value = cacheController.get<User>("user")
         assertThat(value).isNotNull()
-        assertThat(value?.name).isEqualTo("test")
+        assertThat(value.name).isEqualTo("test")
     }
 
     @Test
@@ -45,14 +47,15 @@ class CacheControllerTest {
 
         assertThat(cacheController.hasKey("user")).isTrue()
 
-        val value = cacheController.getList<User>("user")
+        val value = cacheController.getList<User>("user", genericType<List<User>>())
         assertThat(value).isNotNull()
-        assertThat(value?.get(0)?.name).isEqualTo("test")
-        assertThat(value?.get(1)?.name).isEqualTo("test2")
+        assertThat(value[0].name).isEqualTo("test")
+        assertThat(value[1].name).isEqualTo("test2")
     }
 
     @Test
     fun deleteCache() {
 
     }
+
 }

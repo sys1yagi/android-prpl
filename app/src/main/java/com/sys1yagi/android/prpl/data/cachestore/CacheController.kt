@@ -13,14 +13,14 @@ class CacheController(val cacheDao: CacheDao, val gson: Gson, val timeProvider: 
         })
     }
 
-    inline fun <reified T> get(key: String): T? {
-        return cacheDao.get(key)?.let {
+    inline fun <reified T> get(key: String): T {
+        return cacheDao.get(key).let {
             gson.fromJson(it.value, T::class.java)
         }
     }
 
-    inline fun <reified T> getList(key: String, type: Type): List<T>? {
-        return cacheDao.get(key)?.let {
+    inline fun <reified T> getList(key: String, type: Type): List<T> {
+        return cacheDao.get(key).let {
             gson.fromJson(it.value, type)
         }
     }

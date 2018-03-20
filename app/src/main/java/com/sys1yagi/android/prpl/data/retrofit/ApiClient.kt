@@ -10,11 +10,14 @@ import retrofit2.http.Path
 
 interface ApiClient {
     @GET("users/{username}")
-    fun getUser(@Path("username") user: String): Call<User>
+    fun getUser(@Path("username") userName: String): Call<User>
 
-    @GET("users/{user}/repos")
-    fun listRepos(@Path("user") user: String): Call<List<Repo>>
+    @GET("users/{username}/repos")
+    fun repoList(@Path("username") userName: String): Call<List<Repo>>
 
-    @GET("repos/{owner}/{repos}/commits")
-    fun listCommit(@Path("owner") owner: String, @Path("repos") repos: String): Call<List<Commits>>
+    @GET("repos/{username}/{repo_name}")
+    fun repo(@Path("username") userName: String, @Path("repo_name") repoName: String): Call<Repo>
+
+    @GET("repos/{owner}/{repo_name}/commits")
+    fun commitList(@Path("owner") owner: String, @Path("repo_name") repoName: String): Call<List<Commits>>
 }

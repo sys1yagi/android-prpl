@@ -6,7 +6,7 @@ import android.arch.persistence.room.*
 interface CacheDao {
 
     @Query("SELECT * FROM cache WHERE key = :key LIMIT 1")
-    fun get(key: String): Cache?
+    fun get(key: String): Cache
 
     @Query("SELECT count(0) FROM cache WHERE key = :key LIMIT 1")
     fun exists(key: String): Boolean
